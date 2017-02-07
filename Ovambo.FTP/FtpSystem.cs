@@ -62,9 +62,14 @@ namespace Ovambo.FTP
 			throw new NotImplementedException();
 		}
 
-		public Task<Stream> OpenReadAsync(IUnixFileEntry fileEntry, long startPosition, CancellationToken cancellationToken)
+		public Task<Stream> OpenReadAsync(IUnixFileEntry file, long start, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			return Task.Run(() => OpenRead((FtpFile)file, start));
+		}
+		
+		private Stream OpenRead(FtpFile file, long start)
+		{
+			return file.Read(start);
 		}
 
 		public Task<IBackgroundTransfer> AppendAsync(IUnixFileEntry fileEntry, long? startPosition, Stream data, CancellationToken cancellationToken)

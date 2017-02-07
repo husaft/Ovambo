@@ -20,6 +20,7 @@ namespace Ovambo.FTP
 			var ass = typeof(Server).Assembly;
 			var cmd = new AssemblyFtpCommandHandlerFactory(ass, new Assembly[0]);
 			server = new Server(fsp, msp, host, port, cmd);
+			server.LogManager = new FtpLogManager();
 			server.Start();
 		}
 

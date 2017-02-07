@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using FubarDev.FtpServer.FileSystem;
 using Ovambo.API;
 
@@ -17,6 +18,13 @@ namespace Ovambo.FTP
 			get {
 				return file.Size.GetValueOrDefault();
 			}
+		}
+
+		public Stream Read(long start)
+		{
+			var stream = file.Content;
+			stream.Position = start;
+			return stream;
 		}
 	}
 }
