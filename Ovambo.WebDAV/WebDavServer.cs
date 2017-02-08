@@ -16,7 +16,6 @@ namespace Ovambo.WebDAV
 		private readonly IFileSystem sys;
 		private readonly Uri Uri;
 		private readonly HttpListener listener;
-		private readonly Thread thr;
 		
 		private CancellationTokenSource token;
 
@@ -27,7 +26,6 @@ namespace Ovambo.WebDAV
 			var url = string.Format("http://{0}:{1}/", host, port);
 			listener.Prefixes.Add(url);
 			Uri = new Uri(url);
-			// const bool webdavUseAuthentication = false;
 			listener.AuthenticationSchemeSelectorDelegate = ChooseAuth;
 			listener.Realm = GetType().Name;
 			listener.Start();
@@ -38,8 +36,6 @@ namespace Ovambo.WebDAV
 		{
 			token.Cancel();
 			listener.Stop();
-			thr.Interrupt();
-			thr.Abort();
 		}
 		
 		private async void Loop()
