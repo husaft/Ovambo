@@ -2,7 +2,6 @@
 using System.Net;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using NWebDav.Server;
 using NWebDav.Server.Http;
 using NWebDav.Server.HttpListener;
@@ -58,7 +57,7 @@ namespace Ovambo.WebDAV
 		
 		private bool CheckAuth(HttpListenerBasicIdentity identity)
 		{
-			return true; //i.Name == webdavUsername && i.Password == webdavPassword
+			return true; // i.Name == webdavUsername && i.Password == webdavPassword
 		}
 		
 		private AuthenticationSchemes ChooseAuth(HttpListenerRequest req)

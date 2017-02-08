@@ -21,42 +21,52 @@ namespace Ovambo.WebDAV
 			this.entry = entry;
 		}
 
-		public string Name {
+		public virtual string FullPath {
+			get {
+				var par = parent == null ? "" : parent.Name;
+				return string.Format("{0}/{1}", par, Name);
+			}
+		}
+		
+		public virtual string Name {
+			get { return entry.Name; }
+		}
+		
+		public virtual string UniqueKey {
+			get { return FullPath; }
+		}
+		
+		public virtual bool IsWritable {
 			get {
 				throw new NotImplementedException();
 			}
 		}
+
+		public virtual Task<Stream> GetReadableStreamAsync(IHttpContext context)
+		{
+			throw new NotImplementedException();
+		}
 		
-		public bool IsWritable { get; set; }
+		public virtual Task<DavStatusCode> UploadFromStreamAsync(IHttpContext context, Stream source)
+		{
+			throw new NotImplementedException();
+		}
 		
-		public string FullPath {
+		public virtual Task<StoreItemResult> CopyAsync(IStoreCollection destination, string name, bool overwrite, IHttpContext context)
+		{
+			throw new NotImplementedException();
+		}
+		
+		public virtual IPropertyManager PropertyManager {
+			get { return new DavPropManager(); }
+		}
+		
+		public virtual ILockingManager LockingManager {
 			get {
 				throw new NotImplementedException();
 			}
 		}
-		
-		public string UniqueKey {
-			get {
-				throw new NotImplementedException();
-			}
-		}
-		
-		public IPropertyManager PropertyManager {
-			get {
-				throw new NotImplementedException();
-			}
-		}
-		
-		public ILockingManager LockingManager {
-			get {
-				throw new NotImplementedException();
-			}
-		}
-		
-		public abstract Task<Stream> GetReadableStreamAsync(IHttpContext context);
-		
-		public abstract Task<DavStatusCode> UploadFromStreamAsync(IHttpContext context, Stream source);
-		
-		public abstract Task<StoreItemResult> CopyAsync(IStoreCollection destination, string name, bool overwrite, IHttpContext context);
 	}
+	
+	
 }

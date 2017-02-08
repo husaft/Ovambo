@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using NWebDav.Server;
 using Ovambo.API;
 using NWebDav.Server.Stores;
 using System.Threading.Tasks;
@@ -28,15 +27,5 @@ namespace Ovambo.WebDAV
 			stream.Position = 0;
 			return stream;
 		}
-		
-		public override Task<DavStatusCode> UploadFromStreamAsync(IHttpContext context, Stream source)
-		{
-			throw new NotImplementedException();
-		}
-		
-		public override Task<StoreItemResult> CopyAsync(IStoreCollection destination, string name, bool overwrite, IHttpContext context)
-		{
-			throw new NotImplementedException();
-		}		
 	}
 }
